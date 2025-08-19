@@ -31,7 +31,7 @@ class ChatBot:
         return result
 
     def execute(self,prompt_manager, log_and_call_manager, output_manager, chain_id, messages):
-        from bambooai import models
+        from . import models
         
         self.completion = models.llm_stream(prompt_manager, log_and_call_manager, output_manager, messages, agent=self.agent, chain_id=chain_id)
 
@@ -264,7 +264,7 @@ class Reader:
         agent = 'Google Search Summarizer'
         text = ""
         
-        from bambooai import models
+        from . import models
         
         # Construct prompt and messages
         for ctx in contexts:
@@ -301,7 +301,7 @@ class Search:
 class GeminiSearch:
     def __init__(self):
 
-        from bambooai import models
+        from . import models
         
         self.API_KEY = os.environ.get('GEMINI_API_KEY')
         self.gemini_client = genai.Client(api_key=self.API_KEY)

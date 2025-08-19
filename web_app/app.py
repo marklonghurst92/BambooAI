@@ -126,9 +126,9 @@ load_dotenv()
 
 # Try importing bambooai directly (pip installed case)
 try:
-    from bambooai import BambooAI
-    from bambooai import utils
-    from bambooai import executor_client
+    from . import BambooAI
+    from . import utils
+    from . import executor_client
 except ImportError:
     # If direct import fails, try adding the local path (cloned repo case)
     current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -136,9 +136,9 @@ except ImportError:
     
     if os.path.exists(bamboo_ai_path):
         sys.path.insert(0, bamboo_ai_path)
-        from bambooai import BambooAI
-        from bambooai import utils
-        from bambooai import executor_client
+        from . import BambooAI
+        from . import utils
+        from . import executor_client
     else:
         raise ImportError("Could not find bambooai package. Please either install via pip or ensure you're running from the correct directory in the cloned repository.")
 

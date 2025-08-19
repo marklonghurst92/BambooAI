@@ -5,7 +5,7 @@ import time
 from groq import Groq
 import tiktoken
 
-from bambooai import google_search, utils, context_retrieval
+from .. import google_search, utils, context_retrieval
 
 def init():
     API_KEY = os.environ.get('GROQ_API_KEY')

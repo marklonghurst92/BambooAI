@@ -4,7 +4,7 @@ import time
 import anthropic
 import logging
 
-from bambooai import google_search, utils, context_retrieval
+from .. import google_search, utils, context_retrieval
 
 # Define the available functions
 google_search_function = google_search.SmartSearchOrchestrator()

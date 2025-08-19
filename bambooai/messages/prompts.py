@@ -5,7 +5,7 @@ import importlib.resources
 import sys
 import warnings
 
-_DEFAULT_PROMPTS_PACKAGE_PATH = "bambooai.messages"
+_DEFAULT_PROMPTS_PACKAGE_PATH = "lib.bambooai.bambooai.messages"
 _DEFAULT_PROMPTS_FILENAME = "default_prompts.yaml"
 
 _EXPECTED_TEMPLATES = [

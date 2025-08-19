@@ -4,7 +4,7 @@ import time
 import openai
 import tiktoken
 
-from bambooai import google_search, utils
+from .. import google_search, utils
 
 google_search_function = google_search.SmartSearchOrchestrator()
 

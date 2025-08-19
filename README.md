@@ -107,7 +107,7 @@ Try it out on a basic example in Google Colab: [![Open In Colab](https://colab.r
 5. Run
     ```python
     import pandas as pd
-    from bambooai import BambooAI
+    from . import BambooAI
 
     import plotly.io as pio
     pio.renderers.default = 'jupyterlab'
@@ -353,7 +353,7 @@ When you ask questions that might benefit from auxiliary data, BambooAI will:
 ### How to Use
 
 ```python
-from bambooai import BambooAI
+from . import BambooAI
 import pandas as pd
 
 # Load primary dataset
@@ -384,7 +384,7 @@ BambooAI supports custom ontologies to ground the agents within the specific dom
 ### How to Use
 
 ```python
-from bambooai import BambooAI
+from . import BambooAI
 import pandas as pd
 
 # Initialize with ontology file path
@@ -413,7 +413,7 @@ BambooAI supports integration with vector database. The main putpose is to allow
 ### How to Use
 
 ```python
-from bambooai import BambooAI
+from . import BambooAI
 import pandas as pd
 
 # Initialize with ontology file path
@@ -443,7 +443,7 @@ Upon successful analysis completion, user has an ability to rank and store the s
 ### Interactive Mode (Jupyter Notebook or CLI)
 ```python
 import pandas as pd
-from bambooai import BambooAI
+from . import BambooAI
 
 import plotly.io as pio
 pio.renderers.default = 'jupyterlab'

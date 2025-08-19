@@ -326,7 +326,7 @@ def inspect_dataframe(df, prompt_manager=None, log_and_call_manager=None, output
 
     if log_and_call_manager:
         try:
-            from bambooai import models
+            from . import models
 
             # Generate the DataFrame preview and auxiliary datasets preview
             primary_df_head = dataframe_to_string(df=df, execution_mode=execution_mode, df_id=df_id, executor_client=executor_client)

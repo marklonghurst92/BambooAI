@@ -1,6 +1,6 @@
-from bambooai.messages import reg_ex
-from bambooai.output_manager import OutputManager
-from bambooai.storage_manager import SimpleInteractionStore, StorageError
+from . import reg_ex
+from ..output_manager import OutputManager
+from ..storage_manager import SimpleInteractionStore, StorageError
 
 class MessageManager:
     def __init__(self, prompts, output_manager: OutputManager, multimodal_models, max_conversations, user_id: str = None):
@@ -112,6 +112,10 @@ class MessageManager:
                 messages=messages,
                 tool_results=tool_results
             )
+
+        def add_final_answer(self, final_answer):
+            """Add the final answer to the interaction store."""
+            self.final_answer = final_answer
 
     def reset_messages(self, prompts):
         self.pre_eval_messages = [{"role": "system", "content": prompts.expert_selector_system}]

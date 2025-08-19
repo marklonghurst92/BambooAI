@@ -4,12 +4,13 @@ import uuid
 import pandas as pd
 import warnings
 import json
+import traceback
 warnings.filterwarnings('ignore')
 
-from bambooai import code_executor, models, template_formatting, qa_retrieval, log_manager, output_manager, web_output_manager, storage_manager, utils, executor_client
-from bambooai.messages import reg_ex, tools_definition
-from bambooai.messages.message_manager import MessageManager
-from bambooai.messages.prompts import PromptManager
+from . import code_executor, models, template_formatting, qa_retrieval, log_manager, output_manager, web_output_manager, storage_manager, utils, executor_client
+from .messages import reg_ex, tools_definition
+from .messages.message_manager import MessageManager
+from .messages.prompts import PromptManager
 
 class BambooAI:
     def __init__(self, df: pd.DataFrame = None,
@@ -479,7 +480,7 @@ class BambooAI:
     ### Main Function ###
     #####################
 
-    def pd_agent_converse(self, question=None, action=None, thread_id=None, chain_id=None, image=None, user_code=None):
+    def pd_agent_converse(self, question=None, action=None, thread_id=None, chain_id=None, image=None, user_code=None, auto_reset=False):
         # Determine the mode of operation
         is_web = self.webui
         is_single_query = question is not None and not is_web
@@ -515,15 +516,15 @@ class BambooAI:
                     question = self.output_manager.get_user_input()
                 
                 # Process the question
-                self._process_question(question, image, user_code)
+                results = self._process_question(question, image, user_code)
 
                 # Reset non-cumulative messages
                 self.message_manager.reset_non_cumul_messages()
                 
-                if not is_web:
+                if not is_web and auto_reset:
                     self.log_and_call_manager.consolidate_logs()
                     self.reset_messages_and_logs()
-                return
+                return results
             else:
                 # For CLI/Jupyter interactive mode
                 question = self.output_manager.display_user_input_prompt()
@@ -670,6 +671,7 @@ class BambooAI:
         # Store the interaction
         self.message_manager.store_interaction(self.thread_id, self.chain_id, google_search_results=tool_response, plot_jsons=plot_jsons, code_exec_results=results, executed_code=code, qa_pairs=self.message_manager.qa_pairs, tasks=self.message_manager.tasks)
             
+        return answer
     ######################
     ### Code Functions ###
     ######################
@@ -891,6 +893,5 @@ class BambooAI:
 
         self.message_manager.insight_messages.append({"role": "assistant", "content": summary})
 
-        self.output_manager.display_results(chain_id=self.chain_id, answer=summary)
-
+        result = self.output_manager.display_results(chain_id=self.chain_id, answer=summary)
         return summary

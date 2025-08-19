@@ -4,12 +4,12 @@ import queue
 import json
 import pandas as pd
 
-from bambooai.output_manager import OutputManager
+from .output_manager import OutputManager
 
 class WebOutputManager(OutputManager):
     def __init__(self):
         super().__init__()
-        self.web_mode = True
+        self.web_mode = False
         self.output_queue = queue.Queue()
         self.input_queue = queue.Queue()
         self.capture_output = StringIO()
@@ -96,7 +96,7 @@ class WebOutputManager(OutputManager):
                         plot_jsons=None, review=None, 
                         vector_db=False, generated_datasets=None, 
                         semantic_search=None, code_exec_results=None):
-        from bambooai import utils
+        from . import utils
         
         if self.web_mode:
             if df_id is not None:

@@ -1,6 +1,6 @@
 import pytest
 
 def test_import():
-    from bambooai import BambooAI
-    from bambooai import models
+    from . import BambooAI
+    from . import models
     assert True

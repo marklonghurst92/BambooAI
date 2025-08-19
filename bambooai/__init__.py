@@ -1,1 +1,1 @@
-from bambooai.bambooai import BambooAI
+from .bambooai import BambooAI
